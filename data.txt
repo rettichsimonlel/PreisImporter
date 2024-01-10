@@ -2,3 +2,6 @@ Lenzing, 170447112, 34.75, EUR, Vienna;
 Andritz, 170447131, 59.41, USD, New York;
 EVN, 170447132, 28.55, EUR, Vienna;
 EVN, 170447133, 31.18, USD, New York;
+Lenzing, 170447300, 35.20, EUR, Vienna;
+Andritz, 170447300, 100.41, USD, New York;
+Andritz, 170447500, 150.41, USD, New York;
