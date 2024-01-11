@@ -11,34 +11,40 @@ def import_data(filename):
             lines.append(line)
     return lines
 
-
 def visualize_data(data):
     company_data = {}
 
     for entry in data:
         company = entry[0]
-        country = entry[4]
         time = entry[1]
         stock_price = entry[2]
+        currency = entry[3]
+        country = entry[4]
 
         key = f"{company}_{country}"
 
         if key not in company_data:
-            company_data[key] = {"times": [], "prices": []}
+            company_data[key] = {"times": [], "prices": [], "currency": currency}
 
         company_data[key]["times"].append(time)
         company_data[key]["prices"].append(stock_price)
 
-    for key, values in company_data.items():
-        company, country = key.split("_")
-        times = values["times"]
-        prices = values["prices"]
-
+    for company in set(entry[0] for entry in data):
         plt.figure(figsize=(10, 5))
-        plt.plot(times, prices, marker='o', label=f"{company} - {country}")
         plt.xlabel('Time')
         plt.ylabel('Stock Price')
-        plt.title(f'Stock Prices Trend for {company} in {country}')
+        plt.title(f'Stock Prices Trend for {company}')
+
+        for key, values in company_data.items():
+            current_company, current_country = key.split("_")
+
+            if current_company == company:
+                times = values["times"]
+                prices = values["prices"]
+                currency = values["currency"]
+
+                plt.plot(times, prices, marker='o', label=f"{current_country} ({currency})")
+
         plt.legend()
         plt.show()
 
